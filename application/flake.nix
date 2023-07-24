@@ -54,6 +54,11 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixos { inherit system; };
+        pname = "pythoneda-realm-rydnr-application";
+        pythonpackage = "pythoneda.realm.rydnr.application";
+        package = builtins.replaceStrings [ "." ] [ "/" ] pythonpackage;
+        entrypoint = "rydnr";
+        entrypoint-path = "${package}/${entrypoint}.py";
         description = "Application layer for pythoneda-realm-rydnr";
         license = pkgs.lib.licenses.gpl3;
         homepage = "https://github.com/pythoneda-realm-rydnr/application";
@@ -67,10 +72,8 @@
           , pythoneda-shared-pythoneda-infrastructure
           , pythoneda-shared-pythoneda-application, version }:
           let
-            pname = "pythoneda-realm-rydnr-application";
             pnameWithUnderscores =
               builtins.replaceStrings [ "-" ] [ "_" ] pname;
-            pythonpackage = "pythoneda.realm.rydnr.application";
             pythonVersionParts = builtins.splitVersion python.version;
             pythonMajorVersion = builtins.head pythonVersionParts;
             pythonMajorMinorVersion =
@@ -85,9 +88,8 @@
               authors = builtins.concatStringsSep ","
                 (map (item: ''"${item}"'') maintainers);
               desc = description;
-              inherit homepage pname pythonMajorMinorVersion pythonpackage
-                version;
-              package = builtins.replaceStrings [ "." ] [ "/" ] pythonpackage;
+              inherit homepage package pname pythonMajorMinorVersion
+                pythonpackage version;
               pythonedaRealmRydnrEventsVersion =
                 pythoneda-realm-rydnr-events.version;
               pythonedaRealmRydnrInfrastructureVersion =
@@ -130,9 +132,21 @@
             '';
 
             postInstall = ''
-              mkdir $out/dist
+              pushd /build/$sourceRoot
+              for f in $(find . -name '__init__.py'); do
+                if [[ ! -e $out/lib/python${pythonMajorMinorVersion}/site-packages/$f ]]; then
+                  cp $f $out/lib/python${pythonMajorMinorVersion}/site-packages/$f;
+                fi
+              done
+              popd
+              mkdir $out/dist $out/bin
               cp dist/${wheelName} $out/dist
               jq ".url = \"$out/dist/${wheelName}\"" $out/lib/python${pythonMajorMinorVersion}/site-packages/${pnameWithUnderscores}-${version}.dist-info/direct_url.json > temp.json && mv temp.json $out/lib/python${pythonMajorMinorVersion}/site-packages/${pnameWithUnderscores}-${version}.dist-info/direct_url.json
+              chmod +x $out/lib/python${pythonMajorMinorVersion}/site-packages/${entrypoint-path}
+              echo '#!/usr/bin/env sh' > $out/bin/${entrypoint}.sh
+              echo "export PYTHONPATH=$PYTHONPATH" >> $out/bin/${entrypoint}.sh
+              echo "${python}/bin/python $out/lib/python${pythonMajorMinorVersion}/site-packages/${entrypoint-path} $@" >> $out/bin/${entrypoint}.sh
+              chmod +x $out/bin/${entrypoint}.sh
             '';
 
             meta = with pkgs.lib; {
@@ -155,6 +169,72 @@
               pythoneda-shared-pythoneda-infrastructure;
           };
       in rec {
+        apps = rec {
+          pythoneda-realm-rydnr-application-0_0_1a1-python38 = shared.app-for {
+            package =
+              self.packages.${system}.pythoneda-realm-rydnr-application-0_0_1a1-python38;
+            inherit entrypoint;
+          };
+          pythoneda-realm-rydnr-application-0_0_1a1-python39 = shared.app-for {
+            package =
+              self.packages.${system}.pythoneda-realm-rydnr-application-0_0_1a1-python39;
+            inherit entrypoint;
+          };
+          pythoneda-realm-rydnr-application-0_0_1a1-python310 = shared.app-for {
+            package =
+              self.packages.${system}.pythoneda-realm-rydnr-application-0_0_1a1-python310;
+            inherit entrypoint;
+          };
+          pythoneda-realm-rydnr-application-latest-python38 =
+            pythoneda-realm-rydnr-application-0_0_1a1-python38;
+          pythoneda-realm-rydnr-application-latest-python39 =
+            pythoneda-realm-rydnr-application-0_0_1a1-python39;
+          pythoneda-realm-rydnr-application-latest-python310 =
+            pythoneda-realm-rydnr-application-0_0_1a1-python310;
+          pythoneda-realm-rydnr-application-latest =
+            pythoneda-realm-rydnr-application-latest-python310;
+          default = pythoneda-realm-rydnr-application-latest;
+        };
+        defaultApp = apps.default;
+        defaultPackage = packages.default;
+        devShells = rec {
+          pythoneda-realm-rydnr-application-0_0_1a1-python38 =
+            shared.devShell-for {
+              package =
+                packages.pythoneda-realm-rydnr-application-0_0_1a1-python38;
+              python = pkgs.python38;
+              pythoneda-shared-pythoneda-domain =
+                pythoneda-shared-pythoneda-domain.packages.${system}.pythoneda-shared-pythoneda-domain-latest-python38;
+              inherit pkgs nixpkgsRelease;
+            };
+          pythoneda-realm-rydnr-application-0_0_1a1-python39 =
+            shared.devShell-for {
+              package =
+                packages.pythoneda-realm-rydnr-application-0_0_1a1-python39;
+              python = pkgs.python39;
+              pythoneda-shared-pythoneda-domain =
+                pythoneda-shared-pythoneda-domain.packages.${system}.pythoneda-shared-pythoneda-domain-latest-python39;
+              inherit pkgs nixpkgsRelease;
+            };
+          pythoneda-realm-rydnr-application-0_0_1a1-python310 =
+            shared.devShell-for {
+              package =
+                packages.pythoneda-realm-rydnr-application-0_0_1a1-python310;
+              python = pkgs.python310;
+              pythoneda-shared-pythoneda-domain =
+                pythoneda-shared-pythoneda-domain.packages.${system}.pythoneda-shared-pythoneda-domain-latest-python310;
+              inherit pkgs nixpkgsRelease;
+            };
+          pythoneda-realm-rydnr-application-latest-python38 =
+            pythoneda-realm-rydnr-application-0_0_1a1-python38;
+          pythoneda-realm-rydnr-application-latest-python39 =
+            pythoneda-realm-rydnr-application-0_0_1a1-python39;
+          pythoneda-realm-rydnr-application-latest-python310 =
+            pythoneda-realm-rydnr-application-0_0_1a1-python310;
+          pythoneda-realm-rydnr-application-latest =
+            pythoneda-realm-rydnr-application-latest-python310;
+          default = pythoneda-realm-rydnr-application-latest;
+        };
         packages = rec {
           pythoneda-realm-rydnr-application-0_0_1a1-python38 =
             pythoneda-realm-rydnr-application-0_0_1a1-for {
@@ -213,46 +293,6 @@
           pythoneda-realm-rydnr-application-latest =
             pythoneda-realm-rydnr-application-latest-python310;
           default = pythoneda-realm-rydnr-application-latest;
-        };
-        defaultPackage = packages.default;
-        devShells = rec {
-          pythoneda-realm-rydnr-application-0_0_1a1-python38 =
-            shared.devShell-for {
-              package =
-                packages.pythoneda-realm-rydnr-application-0_0_1a1-python38;
-              python = pkgs.python38;
-              pythoneda-shared-pythoneda-domain =
-                pythoneda-shared-pythoneda-domain.packages.${system}.pythoneda-shared-pythoneda-domain-latest-python38;
-              inherit pkgs nixpkgsRelease;
-            };
-          pythoneda-realm-rydnr-application-0_0_1a1-python39 =
-            shared.devShell-for {
-              package =
-                packages.pythoneda-realm-rydnr-application-0_0_1a1-python39;
-              python = pkgs.python39;
-              pythoneda-shared-pythoneda-domain =
-                pythoneda-shared-pythoneda-domain.packages.${system}.pythoneda-shared-pythoneda-domain-latest-python39;
-              inherit pkgs nixpkgsRelease;
-            };
-          pythoneda-realm-rydnr-application-0_0_1a1-python310 =
-            shared.devShell-for {
-              package =
-                packages.pythoneda-realm-rydnr-application-0_0_1a1-python310;
-              python = pkgs.python310;
-              pythoneda-shared-pythoneda-domain =
-                pythoneda-shared-pythoneda-domain.packages.${system}.pythoneda-shared-pythoneda-domain-latest-python310;
-              inherit pkgs nixpkgsRelease;
-            };
-          pythoneda-realm-rydnr-application-latest-python38 =
-            pythoneda-realm-rydnr-application-0_0_1a1-python38;
-          pythoneda-realm-rydnr-application-latest-python39 =
-            pythoneda-realm-rydnr-application-0_0_1a1-python39;
-          pythoneda-realm-rydnr-application-latest-python310 =
-            pythoneda-realm-rydnr-application-0_0_1a1-python310;
-          pythoneda-realm-rydnr-application-latest =
-            pythoneda-realm-rydnr-application-latest-python310;
-          default = pythoneda-realm-rydnr-application-latest;
-
         };
       });
 }

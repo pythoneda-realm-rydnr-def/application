@@ -26,7 +26,7 @@ rec {
       echo;
       echo " Thank you for using pythoneda-realm-rydnr/application, and for your appreciation of free software.";
       echo;
-      export PYTHONPATH="$(python $PYTHONEDA/dist/scripts/fix_pythonpath.py)";
+      export PYTHONPATH_="$(python $PYTHONEDA/dist/scripts/fix_pythonpath.py)";
     '';
   devShell-for = { package, pkgs, python, pythoneda-shared-pythoneda-domain
     , nixpkgsRelease }:
@@ -36,4 +36,8 @@ rec {
         inherit package python pythoneda-shared-pythoneda-domain nixpkgsRelease;
       };
     };
+  app-for = { package, entrypoint }: {
+    type = "app";
+    program = "${package}/bin/${entrypoint}.sh";
+  };
 }
