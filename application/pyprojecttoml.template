@@ -1,3 +1,21 @@
+# application/pyprojecttoml.template
+#
+# This file is the template for pythoneda-realm-rydnr/application's pyproject.toml
+#
+# Copyright (C) 2023-today rydnr's pythoneda-realm-rydnr/application-artifact
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
 [tool.poetry]
 name = "@pname@"
 version = "@version@"
@@ -8,11 +26,20 @@ homepage = "@homepage@"
 packages = [{include = "@package@"}]
 
 [tool.poetry.dependencies]
+dbus-next = "^@dbusNextVersion@"
+grpcio = "^@grpcioVersion@"
 python = "^@pythonMajorMinorVersion@"
 pythoneda-realm-rydnr-events = "^@pythonedaRealmRydnrEventsVersion@"
+pythoneda-realm-rydnr-events-infrastructure = "^@pythonedaRealmRydnrEventsInfrastructureVersion@"
+pythoneda-realm-rydnr-infrastructure = "^@pythonedaRealmRydnrInfrastructureVersion@"
 pythoneda-shared-artifact-changes-events = "^@pythonedaSharedArtifactChangesEventsVersion@"
+pythoneda-shared-artifact-changes-events-infrastructure = "^@pythonedaSharedArtifactChangesEventsInfrastructureVersion@"
+pythoneda-shared-artifact-changes-shared = "^@pythonedaSharedArtifactChangesSharedVersion@"
+pythoneda-shared-git-shared = "^@pythonedaSharedGitSharedVersion@"
 pythoneda-shared-pythoneda-domain = "^@pythonedaSharedPythonedaDomainVersion@"
 pythoneda-shared-pythoneda-infrastructure = "^@pythonedaSharedPythonedaInfrastructureVersion@"
+requests = "^@requestsVersion@"
+unidiff = "^@unidiffVersion@"
 
 [build-system]
 requires = ["poetry-core"]
