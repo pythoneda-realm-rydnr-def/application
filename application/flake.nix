@@ -284,6 +284,8 @@
               chmod +x $out/lib/python${pythonMajorMinorVersion}/site-packages/${entrypoint-path}
               echo '#!/usr/bin/env sh' > $out/bin/${entrypoint}.sh
               echo "export PYTHONPATH=$PYTHONPATH" >> $out/bin/${entrypoint}.sh
+              echo "PYTHONPATH=${pythoneda-shared-pythoneda-banner} ${python}/bin/python ${pythoneda-shared-pythoneda-banner}/pythoneda/banner/banner.py -o ${org} -r ${repo} -t ${version} -s ${space} -a ${archRole} -l ${layer} -p ${python.version} -n ${nixpkgsRelease}" >> $out/bin/${entrypoint}.sh
+              echo "echo 'Running ${org}/${repo}-${version}'" >> $out/bin/${entrypoint}.sh
               echo "${python}/bin/python $out/lib/python${pythonMajorMinorVersion}/site-packages/${entrypoint-path} $@" >> $out/bin/${entrypoint}.sh
               chmod +x $out/bin/${entrypoint}.sh
             '';
