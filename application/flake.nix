@@ -22,7 +22,7 @@
     nixos.url = "github:NixOS/nixpkgs/nixos-23.05";
     flake-utils.url = "github:numtide/flake-utils/v1.0.0";
     pythoneda-realm-rydnr-events = {
-      url = "github:pythoneda-realm-rydnr/events-artifact/0.0.1a3?dir=events";
+      url = "github:pythoneda-realm-rydnr/events-artifact/0.0.1a4?dir=events";
       inputs.nixos.follows = "nixos";
       inputs.flake-utils.follows = "flake-utils";
       inputs.pythoneda-shared-pythoneda-banner.follows =
@@ -32,7 +32,7 @@
     };
     pythoneda-realm-rydnr-events-infrastructure = {
       url =
-        "github:pythoneda-realm-rydnr/events-infrastructure-artifact/0.0.1a2?dir=events-infrastructure";
+        "github:pythoneda-realm-rydnr/events-infrastructure-artifact/0.0.1a3?dir=events-infrastructure";
       inputs.nixos.follows = "nixos";
       inputs.flake-utils.follows = "flake-utils";
       inputs.pythoneda-shared-pythoneda-banner.follows =
@@ -44,7 +44,7 @@
     };
     pythoneda-realm-rydnr-infrastructure = {
       url =
-        "github:pythoneda-realm-rydnr/infrastructure-artifact/0.0.1a3?dir=infrastructure";
+        "github:pythoneda-realm-rydnr/infrastructure-artifact/0.0.1a4?dir=infrastructure";
       inputs.nixos.follows = "nixos";
       inputs.flake-utils.follows = "flake-utils";
       inputs.pythoneda-shared-pythoneda-banner.follows =
@@ -59,7 +59,7 @@
         "pythoneda-shared-pythoneda-infrastructure";
     };
     pythoneda-realm-rydnr-realm = {
-      url = "github:pythoneda-realm-rydnr/realm-artifact/0.0.1a4?dir=realm";
+      url = "github:pythoneda-realm-rydnr/realm-artifact/0.0.1a5?dir=realm";
       inputs.nixos.follows = "nixos";
       inputs.flake-utils.follows = "flake-utils";
       inputs.pythoneda-shared-pythoneda-banner.follows =
@@ -75,7 +75,7 @@
     };
     pythoneda-shared-artifact-changes-events = {
       url =
-        "github:pythoneda-shared-artifact-changes/events-artifact/0.0.1a6?dir=events";
+        "github:pythoneda-shared-artifact-changes/events-artifact/0.0.1a7?dir=events";
       inputs.nixos.follows = "nixos";
       inputs.flake-utils.follows = "flake-utils";
       inputs.pythoneda-shared-pythoneda-banner.follows =
@@ -87,7 +87,7 @@
     };
     pythoneda-shared-artifact-changes-events-infrastructure = {
       url =
-        "github:pythoneda-shared-artifact-changes/events-infrastructure-artifact/0.0.1a2?dir=events-infrastructure";
+        "github:pythoneda-shared-artifact-changes/events-infrastructure-artifact/0.0.1a3?dir=events-infrastructure";
       inputs.nixos.follows = "nixos";
       inputs.flake-utils.follows = "flake-utils";
       inputs.pythoneda-shared-pythoneda-banner.follows =
@@ -101,7 +101,7 @@
     };
     pythoneda-shared-artifact-changes-shared = {
       url =
-        "github:pythoneda-shared-artifact-changes/shared-artifact/0.0.1a3?dir=shared";
+        "github:pythoneda-shared-artifact-changes/shared-artifact/0.0.1a4?dir=shared";
       inputs.nixos.follows = "nixos";
       inputs.flake-utils.follows = "flake-utils";
       inputs.pythoneda-shared-pythoneda-banner.follows =
@@ -110,7 +110,7 @@
         "pythoneda-shared-pythoneda-domain";
     };
     pythoneda-shared-git-shared = {
-      url = "github:pythoneda-shared-git/shared-artifact/0.0.1a8?dir=shared";
+      url = "github:pythoneda-shared-git/shared-artifact/0.0.1a9?dir=shared";
       inputs.nixos.follows = "nixos";
       inputs.flake-utils.follows = "flake-utils";
       inputs.pythoneda-shared-pythoneda-banner.follows =
@@ -119,13 +119,13 @@
         "pythoneda-shared-pythoneda-domain";
     };
     pythoneda-shared-pythoneda-banner = {
-      url = "github:pythoneda-shared-pythoneda/banner/0.0.1a5";
+      url = "github:pythoneda-shared-pythoneda/banner/0.0.1a6";
       inputs.nixos.follows = "nixos";
       inputs.flake-utils.follows = "flake-utils";
     };
     pythoneda-shared-pythoneda-domain = {
       url =
-        "github:pythoneda-shared-pythoneda/domain-artifact/0.0.1a28?dir=domain";
+        "github:pythoneda-shared-pythoneda/domain-artifact/0.0.1a29?dir=domain";
       inputs.nixos.follows = "nixos";
       inputs.flake-utils.follows = "flake-utils";
       inputs.pythoneda-shared-pythoneda-banner.follows =
@@ -133,7 +133,7 @@
     };
     pythoneda-shared-pythoneda-infrastructure = {
       url =
-        "github:pythoneda-shared-pythoneda/infrastructure-artifact/0.0.1a15?dir=infrastructure";
+        "github:pythoneda-shared-pythoneda/infrastructure-artifact/0.0.1a16?dir=infrastructure";
       inputs.nixos.follows = "nixos";
       inputs.flake-utils.follows = "flake-utils";
       inputs.pythoneda-shared-pythoneda-banner.follows =
@@ -143,7 +143,7 @@
     };
     pythoneda-shared-pythoneda-application = {
       url =
-        "github:pythoneda-shared-pythoneda/application-artifact/0.0.1a15?dir=application";
+        "github:pythoneda-shared-pythoneda/application-artifact/0.0.1a17?dir=application";
       inputs.nixos.follows = "nixos";
       inputs.flake-utils.follows = "flake-utils";
       inputs.pythoneda-shared-pythoneda-banner.follows =
@@ -283,10 +283,11 @@
               jq ".url = \"$out/dist/${wheelName}\"" $out/lib/python${pythonMajorMinorVersion}/site-packages/${pnameWithUnderscores}-${version}.dist-info/direct_url.json > temp.json && mv temp.json $out/lib/python${pythonMajorMinorVersion}/site-packages/${pnameWithUnderscores}-${version}.dist-info/direct_url.json
               chmod +x $out/lib/python${pythonMajorMinorVersion}/site-packages/${entrypoint-path}
               echo '#!/usr/bin/env sh' > $out/bin/${entrypoint}.sh
+              echo "PYTHONPATH=${pythoneda-shared-pythoneda-banner} ${python}/bin/python ${pythoneda-shared-pythoneda-banner}/pythoneda/banner/banner.py -o ${org} -r ${repo} -t ${version} -s ${space} -a ${archRole} -l ${layer} -p ${pythonMajorMinorVersion} -n ${nixpkgsRelease}" >> $out/bin/${entrypoint}.sh
+              echo "echo 'Running ${org}/${repo}-${version} on Python ${python.version}'" >> $out/bin/${entrypoint}.sh
               echo "export PYTHONPATH=$PYTHONPATH" >> $out/bin/${entrypoint}.sh
-              echo "PYTHONPATH=${pythoneda-shared-pythoneda-banner} ${python}/bin/python ${pythoneda-shared-pythoneda-banner}/pythoneda/banner/banner.py -o ${org} -r ${repo} -t ${version} -s ${space} -a ${archRole} -l ${layer} -p ${python.version} -n ${nixpkgsRelease}" >> $out/bin/${entrypoint}.sh
-              echo "echo 'Running ${org}/${repo}-${version}'" >> $out/bin/${entrypoint}.sh
-              echo "${python}/bin/python $out/lib/python${pythonMajorMinorVersion}/site-packages/${entrypoint-path} $@" >> $out/bin/${entrypoint}.sh
+              echo "${python}/bin/python $out/lib/python${pythonMajorMinorVersion}/site-packages/${entrypoint-path} \$@" >> $out/bin/${entrypoint}.sh
+              echo "cat \$0" >> $out/bin/${entrypoint}.sh
               chmod +x $out/bin/${entrypoint}.sh
             '';
 
