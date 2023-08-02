@@ -17,12 +17,12 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 {
-  description = "Application layer for pythoneda-realm-rydnr";
+  description = "Application layer for pythoneda-realm-rydnr/realm";
   inputs = rec {
     nixos.url = "github:NixOS/nixpkgs/nixos-23.05";
     flake-utils.url = "github:numtide/flake-utils/v1.0.0";
     pythoneda-realm-rydnr-events = {
-      url = "github:pythoneda-realm-rydnr/events-artifact/0.0.1a5?dir=events";
+      url = "github:pythoneda-realm-rydnr/events-artifact/0.0.1a6?dir=events";
       inputs.nixos.follows = "nixos";
       inputs.flake-utils.follows = "flake-utils";
       inputs.pythoneda-shared-pythoneda-banner.follows =
@@ -32,7 +32,7 @@
     };
     pythoneda-realm-rydnr-events-infrastructure = {
       url =
-        "github:pythoneda-realm-rydnr/events-infrastructure-artifact/0.0.1a4?dir=events-infrastructure";
+        "github:pythoneda-realm-rydnr/events-infrastructure-artifact/0.0.1a5?dir=events-infrastructure";
       inputs.nixos.follows = "nixos";
       inputs.flake-utils.follows = "flake-utils";
       inputs.pythoneda-shared-pythoneda-banner.follows =
@@ -44,7 +44,7 @@
     };
     pythoneda-realm-rydnr-infrastructure = {
       url =
-        "github:pythoneda-realm-rydnr/infrastructure-artifact/0.0.1a6?dir=infrastructure";
+        "github:pythoneda-realm-rydnr/infrastructure-artifact/0.0.1a8?dir=infrastructure";
       inputs.nixos.follows = "nixos";
       inputs.flake-utils.follows = "flake-utils";
       inputs.pythoneda-realm-rydnr-events.follows =
@@ -65,7 +65,7 @@
         "pythoneda-shared-pythoneda-domain";
     };
     pythoneda-realm-rydnr-realm = {
-      url = "github:pythoneda-realm-rydnr/realm-artifact/0.0.1a7?dir=realm";
+      url = "github:pythoneda-realm-rydnr/realm-artifact/0.0.1a8?dir=realm";
       inputs.nixos.follows = "nixos";
       inputs.flake-utils.follows = "flake-utils";
       inputs.pythoneda-realm-rydnr-events.follows =
@@ -83,7 +83,7 @@
     };
     pythoneda-shared-artifact-changes-events = {
       url =
-        "github:pythoneda-shared-artifact-changes/events-artifact/0.0.1a8?dir=events";
+        "github:pythoneda-shared-artifact-changes/events-artifact/0.0.1a9?dir=events";
       inputs.nixos.follows = "nixos";
       inputs.flake-utils.follows = "flake-utils";
       inputs.pythoneda-shared-pythoneda-banner.follows =
@@ -95,7 +95,7 @@
     };
     pythoneda-shared-artifact-changes-events-infrastructure = {
       url =
-        "github:pythoneda-shared-artifact-changes/events-infrastructure-artifact/0.0.1a4?dir=events-infrastructure";
+        "github:pythoneda-shared-artifact-changes/events-infrastructure-artifact/0.0.1a5?dir=events-infrastructure";
       inputs.nixos.follows = "nixos";
       inputs.flake-utils.follows = "flake-utils";
       inputs.pythoneda-shared-artifact-changes-events.follows =
@@ -155,7 +155,7 @@
     };
     pythoneda-shared-pythoneda-application = {
       url =
-        "github:pythoneda-shared-pythoneda/application-artifact/0.0.1a18?dir=application";
+        "github:pythoneda-shared-pythoneda/application-artifact/0.0.1a19?dir=application";
       inputs.nixos.follows = "nixos";
       inputs.flake-utils.follows = "flake-utils";
       inputs.pythoneda-shared-pythoneda-banner.follows =
@@ -170,15 +170,14 @@
       let
         org = "pythoneda-realm-rydnr";
         repo = "application";
-        version = "0.0.1a1";
-        sha256 = "sha256-v3E7ObTLwmSd1ElvhFGoRR3LY47LGocyoQX2vEfWku0=";
-        pkgs = import nixos { inherit system; };
-        pname = "pythoneda-realm-rydnr-application";
-        pythonpackage = "pythoneda.realm.rydnr.application";
+        version = "0.0.1a2";
+        sha256 = "sha256-jGyZxXZjUpHAxdhFTAQar0UKHaTZTv2rIDEKhnkWAmo=";
+        pname = "${org}-${repo}";
+        pythonpackage = builtins.replaceStrings [ "-" ] [ "." ] pname;
         package = builtins.replaceStrings [ "." ] [ "/" ] pythonpackage;
         entrypoint = "rydnr";
         entrypoint-path = "${package}/${entrypoint}.py";
-        description = "Application layer for pythoneda-realm-rydnr";
+        description = "Application layer for pythoneda-realm-rydnr/realm";
         license = pkgs.lib.licenses.gpl3;
         homepage = "https://github.com/${org}/${repo}";
         maintainers = with pkgs.lib.maintainers;
@@ -189,6 +188,7 @@
         nixosVersion = builtins.readFile "${nixos}/.version";
         nixpkgsRelease = "nixos-${nixosVersion}";
         shared = import "${pythoneda-shared-pythoneda-banner}/nix/shared.nix";
+        pkgs = import nixos { inherit system; };
         pythoneda-realm-rydnr-application-for = { python
           , pythoneda-realm-rydnr-events
           , pythoneda-realm-rydnr-events-infrastructure
