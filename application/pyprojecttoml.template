@@ -28,6 +28,8 @@ packages = [{include = "@package@"}]
 [tool.poetry.dependencies]
 dbus-next = "^@dbusNextVersion@"
 grpcio = "^@grpcioVersion@"
+jupyterlab = "^@jupyterlabVersion@"
+nbformat = "^@nbformatVersion@"
 python = "^@pythonMajorMinorVersion@"
 pythoneda-realm-rydnr-events = "^@pythonedaRealmRydnrEventsVersion@"
 pythoneda-realm-rydnr-events-infrastructure = "^@pythonedaRealmRydnrEventsInfrastructureVersion@"
@@ -35,6 +37,9 @@ pythoneda-realm-rydnr-infrastructure = "^@pythonedaRealmRydnrInfrastructureVersi
 pythoneda-shared-artifact-changes-events = "^@pythonedaSharedArtifactChangesEventsVersion@"
 pythoneda-shared-artifact-changes-events-infrastructure = "^@pythonedaSharedArtifactChangesEventsInfrastructureVersion@"
 pythoneda-shared-artifact-changes-shared = "^@pythonedaSharedArtifactChangesSharedVersion@"
+pythoneda-shared-code-requests-events = "^@pythonedaSharedCodeRequestsEventsVersion@"
+pythoneda-shared-code-requests-jupyter = "^@pythonedaSharedCodeRequestsJupyterVersion@"
+pythoneda-shared-code-requests-shared = "^@pythonedaSharedCodeRequestsSharedVersion@"
 pythoneda-shared-git-shared = "^@pythonedaSharedGitSharedVersion@"
 pythoneda-shared-pythoneda-domain = "^@pythonedaSharedPythonedaDomainVersion@"
 pythoneda-shared-pythoneda-infrastructure = "^@pythonedaSharedPythonedaInfrastructureVersion@"

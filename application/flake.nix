@@ -121,6 +121,40 @@
       inputs.pythoneda-shared-pythoneda-domain.follows =
         "pythoneda-shared-pythoneda-domain";
     };
+    pythoneda-shared-code-requests-jupyter = {
+      url =
+        "github:pythoneda-shared-code-requests/jupyter-artifact/0.0.1a1?dir=jupyter";
+      inputs.nixos.follows = "nixos";
+      inputs.flake-utils.follows = "flake-utils";
+      inputs.pythoneda-shared-code-requests-shared.follows =
+        "pythoneda-shared-code-requests-shared";
+      inputs.pythoneda-shared-pythoneda-banner.follows =
+        "pythoneda-shared-pythoneda-banner";
+      inputs.pythoneda-shared-pythoneda-domain.follows =
+        "pythoneda-shared-pythoneda-domain";
+    };
+    pythoneda-shared-code-requests-shared = {
+      url =
+        "github:pythoneda-shared-code-requests/shared-artifact/0.0.1a1?dir=shared";
+      inputs.nixos.follows = "nixos";
+      inputs.flake-utils.follows = "flake-utils";
+      inputs.pythoneda-shared-pythoneda-banner.follows =
+        "pythoneda-shared-pythoneda-banner";
+      inputs.pythoneda-shared-pythoneda-domain.follows =
+        "pythoneda-shared-pythoneda-domain";
+    };
+    pythoneda-shared-code-requests-events = {
+      url =
+        "github:pythoneda-shared-code-requests/events-artifact/0.0.1a1?dir=events";
+      inputs.nixos.follows = "nixos";
+      inputs.flake-utils.follows = "flake-utils";
+      inputs.pythoneda-shared-code-requests-shared.follows =
+        "pythoneda-shared-code-requests-shared";
+      inputs.pythoneda-shared-pythoneda-banner.follows =
+        "pythoneda-shared-pythoneda-banner";
+      inputs.pythoneda-shared-pythoneda-domain.follows =
+        "pythoneda-shared-pythoneda-domain";
+    };
     pythoneda-shared-git-shared = {
       url = "github:pythoneda-shared-git/shared-artifact/0.0.1a10?dir=shared";
       inputs.nixos.follows = "nixos";
@@ -196,7 +230,10 @@
           , pythoneda-shared-artifact-changes-events
           , pythoneda-shared-artifact-changes-events-infrastructure
           , pythoneda-shared-artifact-changes-shared
-          , pythoneda-shared-git-shared, pythoneda-shared-pythoneda-domain
+          , pythoneda-shared-code-requests-events
+          , pythoneda-shared-code-requests-jupyter
+          , pythoneda-shared-code-requests-shared, pythoneda-shared-git-shared
+          , pythoneda-shared-pythoneda-domain
           , pythoneda-shared-pythoneda-infrastructure
           , pythoneda-shared-pythoneda-application }:
           let
@@ -220,6 +257,8 @@
                 pythonpackage version;
               dbusNextVersion = python.pkgs.dbus-next.version;
               grpcioVersion = python.pkgs.grpcio.version;
+              jupyterlabVersion = python.pkgs.jupyterlab.version;
+              nbformatVersion = python.pkgs.nbformat.version;
               pythonedaRealmRydnrEventsVersion =
                 pythoneda-realm-rydnr-events.version;
               pythonedaRealmRydnrEventsInfrastructureVersion =
@@ -234,6 +273,12 @@
                 pythoneda-shared-artifact-changes-events-infrastructure.version;
               pythonedaSharedArtifactChangesSharedVersion =
                 pythoneda-shared-artifact-changes-shared.version;
+              pythonedaSharedCodeRequestsEventsVersion =
+                pythoneda-shared-code-requests-events.version;
+              pythonedaSharedCodeRequestsJupyterVersion =
+                pythoneda-shared-code-requests-jupyter.version;
+              pythonedaSharedCodeRequestsSharedVersion =
+                pythoneda-shared-code-requests-shared.version;
               pythonedaSharedGitSharedVersion =
                 pythoneda-shared-git-shared.version;
               pythonedaSharedPythonedaDomainVersion =
@@ -258,6 +303,8 @@
             propagatedBuildInputs = with python.pkgs; [
               dbus-next
               grpcio
+              jupyterlab
+              nbformat
               pythoneda-realm-rydnr-events
               pythoneda-realm-rydnr-events-infrastructure
               pythoneda-realm-rydnr-infrastructure
@@ -265,6 +312,9 @@
               pythoneda-shared-artifact-changes-events
               pythoneda-shared-artifact-changes-events-infrastructure
               pythoneda-shared-artifact-changes-shared
+              pythoneda-shared-code-requests-events
+              pythoneda-shared-code-requests-jupyter
+              pythoneda-shared-code-requests-shared
               pythoneda-shared-git-shared
               pythoneda-shared-pythoneda-domain
               pythoneda-shared-pythoneda-application
@@ -383,12 +433,18 @@
                 pythoneda-shared-artifact-changes-events-infrastructure.packages.${system}.pythoneda-shared-artifact-changes-events-infrastructure-python38;
               pythoneda-shared-artifact-changes-shared =
                 pythoneda-shared-artifact-changes-shared.packages.${system}.pythoneda-shared-artifact-changes-shared-python38;
-              pythoneda-shared-pythoneda-domain =
-                pythoneda-shared-pythoneda-domain.packages.${system}.pythoneda-shared-pythoneda-domain-python38;
+              pythoneda-shared-code-requests-events =
+                pythoneda-shared-code-requests-events.packages.${system}.pythoneda-shared-code-requests-events-python38;
+              pythoneda-shared-code-requests-jupyter =
+                pythoneda-shared-code-requests-jupyter.packages.${system}.pythoneda-shared-code-requests-jupyter-python38;
+              pythoneda-shared-code-requests-shared =
+                pythoneda-shared-code-requests-shared.packages.${system}.pythoneda-shared-code-requests-shared-python38;
               pythoneda-shared-git-shared =
                 pythoneda-shared-git-shared.packages.${system}.pythoneda-shared-git-shared-python38;
               pythoneda-shared-pythoneda-application =
                 pythoneda-shared-pythoneda-application.packages.${system}.pythoneda-shared-pythoneda-application-python38;
+              pythoneda-shared-pythoneda-domain =
+                pythoneda-shared-pythoneda-domain.packages.${system}.pythoneda-shared-pythoneda-domain-python38;
               pythoneda-shared-pythoneda-infrastructure =
                 pythoneda-shared-pythoneda-infrastructure.packages.${system}.pythoneda-shared-pythoneda-infrastructure-python38;
             };
@@ -409,12 +465,18 @@
                 pythoneda-shared-artifact-changes-events-infrastructure.packages.${system}.pythoneda-shared-artifact-changes-events-infrastructure-python39;
               pythoneda-shared-artifact-changes-shared =
                 pythoneda-shared-artifact-changes-shared.packages.${system}.pythoneda-shared-artifact-changes-events-python39;
+              pythoneda-shared-code-requests-events =
+                pythoneda-shared-code-requests-events.packages.${system}.pythoneda-shared-code-requests-events-python39;
+              pythoneda-shared-code-requests-jupyter =
+                pythoneda-shared-code-requests-jupyter.packages.${system}.pythoneda-shared-code-requests-jupyter-python39;
+              pythoneda-shared-code-requests-shared =
+                pythoneda-shared-code-requests-shared.packages.${system}.pythoneda-shared-code-requests-shared-python39;
               pythoneda-shared-git-shared =
                 pythoneda-shared-git-shared.packages.${system}.pythoneda-shared-git-shared-python39;
-              pythoneda-shared-pythoneda-domain =
-                pythoneda-shared-pythoneda-domain.packages.${system}.pythoneda-shared-pythoneda-domain-python39;
               pythoneda-shared-pythoneda-application =
                 pythoneda-shared-pythoneda-application.packages.${system}.pythoneda-shared-pythoneda-application-python39;
+              pythoneda-shared-pythoneda-domain =
+                pythoneda-shared-pythoneda-domain.packages.${system}.pythoneda-shared-pythoneda-domain-python39;
               pythoneda-shared-pythoneda-infrastructure =
                 pythoneda-shared-pythoneda-infrastructure.packages.${system}.pythoneda-shared-pythoneda-infrastructure-python39;
             };
@@ -437,10 +499,16 @@
                 pythoneda-shared-artifact-changes-shared.packages.${system}.pythoneda-shared-artifact-changes-shared-python310;
               pythoneda-shared-git-shared =
                 pythoneda-shared-git-shared.packages.${system}.pythoneda-shared-git-shared-python310;
-              pythoneda-shared-pythoneda-domain =
-                pythoneda-shared-pythoneda-domain.packages.${system}.pythoneda-shared-pythoneda-domain-python310;
+              pythoneda-shared-code-requests-events =
+                pythoneda-shared-code-requests-events.packages.${system}.pythoneda-shared-code-requests-events-python310;
+              pythoneda-shared-code-requests-jupyter =
+                pythoneda-shared-code-requests-jupyter.packages.${system}.pythoneda-shared-code-requests-jupyter-python310;
+              pythoneda-shared-code-requests-shared =
+                pythoneda-shared-code-requests-shared.packages.${system}.pythoneda-shared-code-requests-shared-python310;
               pythoneda-shared-pythoneda-application =
                 pythoneda-shared-pythoneda-application.packages.${system}.pythoneda-shared-pythoneda-application-python310;
+              pythoneda-shared-pythoneda-domain =
+                pythoneda-shared-pythoneda-domain.packages.${system}.pythoneda-shared-pythoneda-domain-python310;
               pythoneda-shared-pythoneda-infrastructure =
                 pythoneda-shared-pythoneda-infrastructure.packages.${system}.pythoneda-shared-pythoneda-infrastructure-python310;
             };
