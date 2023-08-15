@@ -44,11 +44,13 @@
     };
     pythoneda-realm-rydnr-infrastructure = {
       url =
-        "github:pythoneda-realm-rydnr/infrastructure-artifact/0.0.1a9?dir=infrastructure";
+        "github:pythoneda-realm-rydnr/infrastructure-artifact/0.0.1a10?dir=infrastructure";
       inputs.nixos.follows = "nixos";
       inputs.flake-utils.follows = "flake-utils";
       inputs.pythoneda-realm-rydnr-events.follows =
         "pythoneda-realm-rydnr-events";
+      inputs.pythoneda-realm-rydnr-events-infrastructure.follows =
+        "pythoneda-realm-rydnr-events-infrastructure";
       inputs.pythoneda-realm-rydnr-realm.follows =
         "pythoneda-realm-rydnr-realm";
       inputs.pythoneda-shared-artifact-changes-events.follows =
