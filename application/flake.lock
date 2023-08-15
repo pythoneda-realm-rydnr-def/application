@@ -116,6 +116,9 @@
         "pythoneda-shared-artifact-changes-events": [
           "pythoneda-shared-artifact-changes-events"
         ],
+        "pythoneda-shared-artifact-changes-events-infrastructure": [
+          "pythoneda-shared-artifact-changes-events-infrastructure"
+        ],
         "pythoneda-shared-artifact-changes-shared": [
           "pythoneda-shared-artifact-changes-shared"
         ],
@@ -134,17 +137,17 @@
       },
       "locked": {
         "dir": "infrastructure",
-        "lastModified": 1690936679,
-        "narHash": "sha256-yOa4cPD82b+fLqjFVn/PRJkfj5kgUH84dQsOfsk3sSo=",
+        "lastModified": 1692096265,
+        "narHash": "sha256-l+OdhxVobmRTsoeXVFkyViOnmNNfmolSEtqkOgnwvzc=",
         "owner": "pythoneda-realm-rydnr",
         "repo": "infrastructure-artifact",
-        "rev": "3b2affa24e76c1805d60fc6707977dc88526c77a",
+        "rev": "02595cf348aa57a2f0471f009615e76b9d06a0df",
         "type": "github"
       },
       "original": {
         "dir": "infrastructure",
         "owner": "pythoneda-realm-rydnr",
-        "ref": "0.0.1a8",
+        "ref": "0.0.1a9",
         "repo": "infrastructure-artifact",
         "type": "github"
       }

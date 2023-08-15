@@ -44,7 +44,7 @@
     };
     pythoneda-realm-rydnr-infrastructure = {
       url =
-        "github:pythoneda-realm-rydnr/infrastructure-artifact/0.0.1a8?dir=infrastructure";
+        "github:pythoneda-realm-rydnr/infrastructure-artifact/0.0.1a9?dir=infrastructure";
       inputs.nixos.follows = "nixos";
       inputs.flake-utils.follows = "flake-utils";
       inputs.pythoneda-realm-rydnr-events.follows =
@@ -53,16 +53,18 @@
         "pythoneda-realm-rydnr-realm";
       inputs.pythoneda-shared-artifact-changes-events.follows =
         "pythoneda-shared-artifact-changes-events";
+      inputs.pythoneda-shared-artifact-changes-events-infrastructure.follows =
+        "pythoneda-shared-artifact-changes-events-infrastructure";
       inputs.pythoneda-shared-artifact-changes-shared.follows =
         "pythoneda-shared-artifact-changes-shared";
       inputs.pythoneda-shared-git-shared.follows =
         "pythoneda-shared-git-shared";
-      inputs.pythoneda-shared-pythoneda-infrastructure.follows =
-        "pythoneda-shared-pythoneda-infrastructure";
       inputs.pythoneda-shared-pythoneda-banner.follows =
         "pythoneda-shared-pythoneda-banner";
       inputs.pythoneda-shared-pythoneda-domain.follows =
         "pythoneda-shared-pythoneda-domain";
+      inputs.pythoneda-shared-pythoneda-infrastructure.follows =
+        "pythoneda-shared-pythoneda-infrastructure";
     };
     pythoneda-realm-rydnr-realm = {
       url = "github:pythoneda-realm-rydnr/realm-artifact/0.0.1a8?dir=realm";
