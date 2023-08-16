@@ -39,6 +39,7 @@ pythoneda-shared-artifact-changes-events-infrastructure = "^@pythonedaSharedArti
 pythoneda-shared-artifact-changes-shared = "^@pythonedaSharedArtifactChangesSharedVersion@"
 pythoneda-shared-code-requests-events = "^@pythonedaSharedCodeRequestsEventsVersion@"
 pythoneda-shared-code-requests-jupyter = "^@pythonedaSharedCodeRequestsJupyterVersion@"
+pythoneda-shared-code-requests-nix-flake = "^@pythonedaSharedCodeRequestsNixFlakeVersion@"
 pythoneda-shared-code-requests-shared = "^@pythonedaSharedCodeRequestsSharedVersion@"
 pythoneda-shared-git-shared = "^@pythonedaSharedGitSharedVersion@"
 pythoneda-shared-pythoneda-domain = "^@pythonedaSharedPythonedaDomainVersion@"
