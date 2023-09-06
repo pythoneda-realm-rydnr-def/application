@@ -161,17 +161,17 @@
       },
       "locked": {
         "dir": "infrastructure",
-        "lastModified": 1693998782,
-        "narHash": "sha256-NL554DyRgsm5nIVSflFBfKXXwctRZDA+diSyXHeugkA=",
+        "lastModified": 1694011829,
+        "narHash": "sha256-LPl5fQND0+TQqk3cTT7zaXz43UYKaYMoRFP7itvmEVA=",
         "owner": "pythoneda-realm-rydnr",
         "repo": "infrastructure-artifact",
-        "rev": "6e67973c29ef2013b07ed7e0207f26fe72ac7f61",
+        "rev": "b24596aa460270bc7385646abb105c2a4bf619f5",
         "type": "github"
       },
       "original": {
         "dir": "infrastructure",
         "owner": "pythoneda-realm-rydnr",
-        "ref": "0.0.1a20",
+        "ref": "0.0.1a21",
         "repo": "infrastructure-artifact",
         "type": "github"
       }

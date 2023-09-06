@@ -46,7 +46,7 @@
     };
     pythoneda-realm-rydnr-infrastructure = {
       url =
-        "github:pythoneda-realm-rydnr/infrastructure-artifact/0.0.1a20?dir=infrastructure";
+        "github:pythoneda-realm-rydnr/infrastructure-artifact/0.0.1a21?dir=infrastructure";
       inputs.nixos.follows = "nixos";
       inputs.flake-utils.follows = "flake-utils";
       inputs.pythoneda-realm-rydnr-events.follows =
