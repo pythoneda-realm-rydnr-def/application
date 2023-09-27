@@ -1,7 +1,9 @@
-__pycache__
 bin/
 dist/
+*.ipynb
+.ipynb_checkpoints/
 lib/
 lib64
+__pycache__
 pyvenv.cfg
 result
