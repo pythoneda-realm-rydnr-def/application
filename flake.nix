@@ -194,7 +194,7 @@
                 fi
               done
               command popd
-              command mkdir -p $out/dist $out/deps/flakes $out/deps/nixpkgs
+              command mkdir -p $out/dist $out/bin $out/deps/flakes
               command cp dist/${wheelName} $out/dist
               command cp /build/$sourceRoot/entrypoint.sh $out/bin/${entrypoint}.sh
               command chmod +x $out/bin/${entrypoint}.sh
